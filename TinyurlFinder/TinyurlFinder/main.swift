@@ -9,9 +9,9 @@
 import Foundation
 
 class TinyurlFinder: NSObject, URLSessionDataDelegate {
-	let baseURL = "https://tinyurl.com/"
-	var urlSession: URLSession!
-	var task: URLSessionDataTask?
+	private let baseURL = "https://tinyurl.com/"
+	private var urlSession: URLSession!
+	private var task: URLSessionDataTask?
 	
 	override init() {
 		super.init()
@@ -38,7 +38,7 @@ class TinyurlFinder: NSObject, URLSessionDataDelegate {
 		guard let fileContents = try? readWholeFile(at: path) else {
 			return []
 		}
-		let contentsArray = fileContents.components(separatedBy: "^")
+		let contentsArray = fileContents.components(separatedBy: "\n")
 		return contentsArray
 	}
 	
@@ -61,7 +61,7 @@ class TinyurlFinder: NSObject, URLSessionDataDelegate {
 		printCSVRow(for: response, request: request)
 	}
 	
-	func printCSVRow(for response: HTTPURLResponse, request: URLRequest) {
+	private func printCSVRow(for response: HTTPURLResponse, request: URLRequest) {
 		let responseURLString = "\(response.url!)"
 		let path = responseURLString.split(separator: "/")
 		print("\(request.url!)^\(path.last!)")
