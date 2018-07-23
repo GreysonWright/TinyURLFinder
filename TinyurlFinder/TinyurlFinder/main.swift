@@ -64,7 +64,7 @@ class TinyurlFinder: NSObject, URLSessionDataDelegate {
 	func printCSVRow(for response: HTTPURLResponse, request: URLRequest) {
 		let responseURLString = "\(response.url!)"
 		let path = responseURLString.split(separator: "/")
-		print("\(request.url!),\(path.last!)")
+		print("\(request.url!)^\(path.last!)")
 	}
 }
 
